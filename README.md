@@ -115,5 +115,5 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 ### 🧑‍💻 Author
-Developed by **Sajjad Alizadeh**  
-📧 Contact: (your email or GitHub profile)
+Developed by **Sajjad Alizadeh Fard**  
+📧 Contact: (https://github.com/Alizadeh275)
