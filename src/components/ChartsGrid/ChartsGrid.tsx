@@ -1,8 +1,176 @@
 import { DoughnutChartContainer } from '../DoughnutChart/DoughnutChart.container';
 import { BarChartContainer } from '../BarChart/BarChart.container';
+import { StackedBarChartContainer } from '../StackedBarChart/StackedBarChart.container';
 import { TypeAnimation } from 'react-type-animation';
 
 export const ChartsGrid = () => {
+  // Your actual API data
+  const apiData = {
+    "total_count": 18,
+    "chart_data": [
+      {
+        "project_type_name": "تست3",
+        "status_name": "تهیه صورت وضعیت",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست 1", 
+        "status_name": "دردست اجرا",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست6",
+        "status_name": "صورت وضعیت نزد مالی",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست4",
+        "status_name": "تهیه صورت وضعیت", 
+        "count": 0
+      },
+      {
+        "project_type_name": "تست4",
+        "status_name": "صورت وضعیت نزد ستاد",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست 1",
+        "status_name": "صورت وضعیت نزد ستاد",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست4",
+        "status_name": "صورت وضعیت نزد مالی",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست5",
+        "status_name": "تهیه صورت وضعیت",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست4",
+        "status_name": "صورت وضعیت نزد مشاور",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست2",
+        "status_name": "دردست اجرا",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست2",
+        "status_name": "تهیه صورت وضعیت",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست3",
+        "status_name": "صورت وضعیت نزد مالی",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست7",
+        "status_name": "صورت وضعیت نزد مالی",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست 1",
+        "status_name": "صورت وضعیت نزد مالی",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست2",
+        "status_name": "صورت وضعیت نزد مالی",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست7",
+        "status_name": "دردست اجرا",
+        "count": 6
+      },
+      {
+        "project_type_name": "تست6",
+        "status_name": "دردست اجرا",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست5",
+        "status_name": "صورت وضعیت نزد ستاد",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست2",
+        "status_name": "صورت وضعیت نزد ستاد",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست5",
+        "status_name": "صورت وضعیت نزد مشاور",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست5",
+        "status_name": "دردست اجرا",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست6",
+        "status_name": "صورت وضعیت نزد مشاور",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست7",
+        "status_name": "تهیه صورت وضعیت",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست5",
+        "status_name": "صورت وضعیت نزد مالی",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست7",
+        "status_name": "صورت وضعیت نزد مشاور",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست4",
+        "status_name": "دردست اجرا",
+        "count": 12
+      },
+      {
+        "project_type_name": "تست3",
+        "status_name": "دردست اجرا",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست6",
+        "status_name": "تهیه صورت وضعیت",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست 1",
+        "status_name": "تهیه صورت وضعیت",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست7",
+        "status_name": "صورت وضعیت نزد ستاد",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست3",
+        "status_name": "صورت وضعیت نزد ستاد",
+        "count": 0
+      },
+      {
+        "project_type_name": "تست6",
+        "status_name": "صورت وضعیت نزد ستاد",
+        "count": 0
+      }
+    ]
+  };
+
   const charts = [
     {
       id: 1,
@@ -12,9 +180,9 @@ export const ChartsGrid = () => {
     },
     {
       id: 2,
-      type: 'bar',
-      component: <BarChartContainer key="bar-1" />,
-      title: "مقایسه ماهانه دستورکارها"
+      type: 'stacked-bar',
+      component: <StackedBarChartContainer key="stacked-bar-1" data={apiData} />,
+      title: "وضعیت پروژه‌ها بر اساس نوع"
     },
     {
       id: 3,
@@ -48,32 +216,15 @@ export const ChartsGrid = () => {
     },
     {
       id: 4,
-      type: 'bar',
+      type: 'stacked-bar',
       component: (
-        <BarChartContainer 
-          key="bar-2"
-          data={{
-            labels: ["مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
-            datasets: [
-              {
-                label: "فروش ماهانه",
-                data: [450, 320, 510, 480, 390, 550],
-                backgroundColor: "rgba(139,69,19,0.7)",
-                borderColor: "rgba(139,69,19,1)",
-                borderWidth: 1,
-              },
-              {
-                label: "هدف فروش",
-                data: [400, 400, 400, 400, 400, 400],
-                backgroundColor: "rgba(128,128,128,0.7)",
-                borderColor: "rgba(128,128,128,1)",
-                borderWidth: 1,
-              },
-            ],
-          }}
+        <StackedBarChartContainer 
+          key="stacked-bar-2"
+          data={apiData}
+          title="توزیع پروژه‌ها بر اساس وضعیت"
         />
       ),
-      title: "فروش ماهانه"
+      title: "توزیع پروژه‌ها"
     },
     {
       id: 5,
@@ -121,13 +272,6 @@ export const ChartsGrid = () => {
                 borderColor: "rgba(220,20,60,1)",
                 borderWidth: 1,
               },
-              {
-                label: "کاربران جدید",
-                data: [300, 200, 150, 120, 100, 80],
-                backgroundColor: "rgba(50,205,50,0.7)",
-                borderColor: "rgba(50,205,50,1)",
-                borderWidth: 1,
-              },
             ],
           }}
         />
@@ -138,16 +282,13 @@ export const ChartsGrid = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {charts.map((chart, index) => (
+      {charts.map((chart) => (
         <div key={chart.id} className="bg-white p-4 rounded-lg shadow-md">
           <h3 className="text-lg font-bold mb-4 text-center" style={{ fontFamily: "IRANSans", minHeight: '48px' }}>
             <TypeAnimation
-              sequence={[
-                chart.title,
-                1000,
-              ]}
+              sequence={[chart.title, 1000]}
               wrapper="span"
-              speed={30}
+              speed={25}
               style={{ display: 'inline-block' }}
               repeat={0}
               cursor={false}
