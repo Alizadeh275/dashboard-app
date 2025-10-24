@@ -50,9 +50,11 @@ export const StackedBarChartContainer = ({
 
     return {
       labels: projectTypes,
-      datasets: datasets.filter(dataset => 
-        dataset.data.some((count: number) => count > 0)
-      )
+    //   datasets: datasets.filter(dataset => 
+    //     dataset.data.some((count: number) => count > 0)
+    //   )
+      datasets: datasets // Remove the filter to show all statuses even with zero counts
+
     };
   };
 
