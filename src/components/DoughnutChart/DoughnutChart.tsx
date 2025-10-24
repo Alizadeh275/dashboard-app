@@ -1,9 +1,10 @@
 import { Doughnut } from "react-chartjs-2";
-import {type DoughnutChartProps } from "./DoughnutChart.types";
+import { type DoughnutChartProps } from "./DoughnutChart.types";
 
 export const DoughnutChart = ({ data, totalCount }: DoughnutChartProps) => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false, // Add this for grid
     cutout: "60%",
     plugins: {
       legend: { 
@@ -12,8 +13,8 @@ export const DoughnutChart = ({ data, totalCount }: DoughnutChartProps) => {
       },
       title: { 
         display: true, 
-        text: "نمودار وضعیت دستورکارها", 
-        font: { family: "IRANSans", size: 20 } 
+        text: "نمودار وضعیت", // Shorter title for grid
+        font: { family: "IRANSans", size: 14 } // Smaller font
       },
       tooltip: {
         rtl: true,
@@ -33,17 +34,15 @@ export const DoughnutChart = ({ data, totalCount }: DoughnutChartProps) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg mx-auto mb-10 relative">
+    <div className="relative w-full h-full"> {/* Remove container styles */}
       <Doughnut data={data} options={options} />
       {/* آنوتیشن مرکزی */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="text-center">
-          <div className="text-2xl font-bold text-gray-800" style={{ fontFamily: "IRANSans" }}>
-            {totalCount}
-          </div>
-          <div className="text-sm text-gray-600 mt-1" style={{ fontFamily: "IRANSans" }}>
-            کل دستورکارها
-          </div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none text-center">
+        <div className="text-lg font-bold text-gray-800" style={{ fontFamily: "IRANSans" }}>
+          {totalCount}
+        </div>
+        <div className="text-xs text-gray-600 mt-1" style={{ fontFamily: "IRANSans" }}>
+          کل
         </div>
       </div>
     </div>

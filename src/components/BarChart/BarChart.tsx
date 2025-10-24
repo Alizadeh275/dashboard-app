@@ -4,6 +4,7 @@ import { type BarChartProps } from "./BarChart.types";
 export const BarChart = ({ data }: BarChartProps) => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false, // Add this
     plugins: {
       legend: { 
         position: "top" as const, 
@@ -11,8 +12,8 @@ export const BarChart = ({ data }: BarChartProps) => {
       },
       title: { 
         display: true, 
-        text: "نمودار مقایسه ماهانه دستورکارها", 
-        font: { family: "IRANSans", size: 20 } 
+        text: "نمودار مقایسه", // Shorter title
+        font: { family: "IRANSans", size: 14 } // Smaller font
       },
       tooltip: {
         rtl: true,
@@ -43,7 +44,7 @@ export const BarChart = ({ data }: BarChartProps) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-4xl mx-auto">
+    <div className="w-full h-full"> {/* Just the chart container */}
       <Bar data={data} options={options} />
     </div>
   );
