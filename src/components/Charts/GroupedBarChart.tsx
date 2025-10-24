@@ -14,8 +14,11 @@ export const GroupedBarChart = ({ data, title = "نمودار میله‌ای گ
         position: 'top' as const,
         labels: {
           font: {
-            family: 'IRANSans'
-          }
+            family: 'IRANSans',
+            size: 12
+          },
+          padding: 15,
+          usePointStyle: true,
         }
       },
       title: {
@@ -29,10 +32,19 @@ export const GroupedBarChart = ({ data, title = "نمودار میله‌ای گ
       tooltip: {
         rtl: true,
         bodyFont: {
-          family: 'IRANSans'
+          family: 'IRANSans',
+          size: 12
         },
         titleFont: {
-          family: 'IRANSans'
+          family: 'IRANSans',
+          size: 12
+        },
+        callbacks: {
+          label: function(context: any) {
+            const label = context.dataset.label || '';
+            const value = context.parsed.y;
+            return `${label}: ${value.toLocaleString('fa-IR')}`;
+          }
         }
       }
     },
@@ -40,18 +52,33 @@ export const GroupedBarChart = ({ data, title = "نمودار میله‌ای گ
       x: {
         ticks: {
           font: {
-            family: 'IRANSans'
+            family: 'IRANSans',
+            size: 11
           }
+        },
+        grid: {
+          display: false
         }
       },
       y: {
         beginAtZero: true,
         ticks: {
           font: {
-            family: 'IRANSans'
+            family: 'IRANSans',
+            size: 11
+          },
+          callback: function(value: any) {
+            return value.toLocaleString('fa-IR');
           }
+        },
+        grid: {
+          color: 'rgba(0, 0, 0, 0.1)'
         }
       },
+    },
+    interaction: {
+      intersect: false,
+      mode: 'index' as const,
     },
   };
 

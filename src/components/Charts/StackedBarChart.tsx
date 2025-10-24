@@ -5,7 +5,7 @@ interface StackedBarChartProps {
   title?: string;
 }
 
-export const StackedBarChart = ({ data, title = "نمودار میله‌ای" }: StackedBarChartProps) => {
+export const StackedBarChart = ({ data, title = "نمودار میله‌ای تجمعی" }: StackedBarChartProps) => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -14,8 +14,11 @@ export const StackedBarChart = ({ data, title = "نمودار میله‌ای" }
         position: 'top' as const,
         labels: {
           font: {
-            family: 'IRANSans'
-          }
+            family: 'IRANSans',
+            size: 12
+          },
+          padding: 15,
+          usePointStyle: true,
         }
       },
       title: {
@@ -29,29 +32,55 @@ export const StackedBarChart = ({ data, title = "نمودار میله‌ای" }
       tooltip: {
         rtl: true,
         bodyFont: {
-          family: 'IRANSans'
+          family: 'IRANSans',
+          size: 12
         },
         titleFont: {
-          family: 'IRANSans'
+          family: 'IRANSans',
+          size: 12
+        },
+        callbacks: {
+          label: function(context: any) {
+            const label = context.dataset.label || '';
+            const value = context.parsed.y;
+            return `${label}: ${value.toLocaleString('fa-IR')}`;
+          }
         }
       }
     },
     scales: {
       x: {
+        stacked: true,
         ticks: {
           font: {
-            family: 'IRANSans'
+            family: 'IRANSans',
+            size: 11
           }
+        },
+        grid: {
+          display: false
         }
       },
       y: {
+        stacked: true,
         beginAtZero: true,
         ticks: {
           font: {
-            family: 'IRANSans'
+            family: 'IRANSans',
+            size: 11
+          },
+          callback: function(value: any) {
+            return value.toLocaleString('fa-IR');
           }
+        },
+        grid: {
+          color: 'rgba(0, 0, 0, 0.1)'
         }
       },
+    },
+    interaction: {
+      intersect: false,
+      mode: 'index' as const,
     },
   };
 
