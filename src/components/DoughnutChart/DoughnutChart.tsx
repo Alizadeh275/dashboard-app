@@ -37,7 +37,7 @@ export const DoughnutChart = ({ data, totalCount }: DoughnutChartProps) => {
     <div className="relative w-full h-full"> {/* Remove container styles */}
       <Doughnut data={data} options={options} />
       {/* آنوتیشن مرکزی */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none text-center">
+      <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none text-center">
         <div className="text-lg font-bold text-gray-800" style={{ fontFamily: "IRANSans" }}>
           {totalCount}
         </div>
