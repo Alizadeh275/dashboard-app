@@ -1,5 +1,6 @@
 import { DoughnutChartContainer } from '../DoughnutChart/DoughnutChart.container';
 import { BarChartContainer } from '../BarChart/BarChart.container';
+import { TypeAnimation } from 'react-type-animation';
 
 export const ChartsGrid = () => {
   const charts = [
@@ -137,12 +138,22 @@ export const ChartsGrid = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {charts.map((chart) => (
+      {charts.map((chart, index) => (
         <div key={chart.id} className="bg-white p-4 rounded-lg shadow-md">
-          <h3 className="text-lg font-bold mb-4 text-center" style={{ fontFamily: "IRANSans" }}>
-            {chart.title}
+          <h3 className="text-lg font-bold mb-4 text-center" style={{ fontFamily: "IRANSans", minHeight: '48px' }}>
+            <TypeAnimation
+              sequence={[
+                chart.title,
+                1000,
+              ]}
+              wrapper="span"
+              speed={30}
+              style={{ display: 'inline-block' }}
+              repeat={0}
+              cursor={false}
+            />
           </h3>
-          <div className="h-64"> {/* Fixed height container */}
+          <div className="h-64">
             {chart.component}
           </div>
         </div>
