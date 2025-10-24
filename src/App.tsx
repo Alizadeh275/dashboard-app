@@ -1,4 +1,4 @@
-import { Pie, Bar } from "react-chartjs-2";
+import { Doughnut, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -22,7 +22,7 @@ ChartJS.register(
 );
 
 export default function App() {
-  // داده‌های نمونه برای نمودار دایره‌ای
+  // داده‌های نمونه برای نمودار دونات
   const pieData = {
     labels: ["در دست اجرا", "نزد مالی", "تکمیل شده"],
     datasets: [
@@ -44,11 +44,39 @@ export default function App() {
     ],
   };
 
-  const pieOptions = {
+  // محاسبه مجموع برای نمایش در مرکز دونات
+  const totalCount = pieData.datasets[0].data.reduce((sum, value) => sum + value, 0);
+
+  const doughnutOptions = {
     responsive: true,
+    cutout: "60%", // این باعث ایجاد حفره در وسط و تبدیل به دونات می‌شود
     plugins: {
-      legend: { position: "right" as const, labels: { font: { family: "IRANSans" } } },
-      title: { display: true, text: "نمودار وضعیت دستورکارها", font: { family: "IRANSans", size: 20 } },
+      legend: { 
+        position: "top" as const, 
+        labels: { font: { family: "IRANSans" } } 
+      },
+      title: { 
+        display: true, 
+        text: "نمودار وضعیت دستورکارها", 
+        font: { family: "IRANSans", size: 20 } 
+      },
+      tooltip: {
+        rtl: true, // فعال کردن راست به چپ برای tooltip
+        bodyFont: {
+          family: "IRANSans", // فونت فارسی برای tooltip
+        },
+        titleFont: {
+          family: "IRANSans", // فونت فارسی برای عنوان tooltip
+        },
+        callbacks: {
+          label: function(context: any) {
+            const label = context.label || '';
+            const value = context.raw || 0;
+            const percentage = ((value / totalCount) * 100).toFixed(1);
+            return `${label}: ${value} (${percentage}%)`;
+          }
+        }
+      }
     },
     animation: { animateScale: true, animateRotate: true },
   };
@@ -77,12 +105,42 @@ export default function App() {
   const barOptions = {
     responsive: true,
     plugins: {
-      legend: { position: "top" as const, labels: { font: { family: "Vazirmatn" } } },
-      title: { display: true, text: "نمودار مقایسه ماهانه دستورکارها", font: { family: "Vazirmatn", size: 20 } },
+      legend: { 
+        position: "top" as const, 
+        labels: { font: { family: "IRANSans" } } 
+      },
+      title: { 
+        display: true, 
+        text: "نمودار مقایسه ماهانه دستورکارها", 
+        font: { family: "IRANSans", size: 20 } 
+      },
+      tooltip: {
+        rtl: true, // فعال کردن راست به چپ برای tooltip
+        bodyFont: {
+          family: "IRANSans", // فونت فارسی برای tooltip
+        },
+        titleFont: {
+          family: "IRANSans", // فونت فارسی برای عنوان tooltip
+        },
+        callbacks: {
+          label: function(context: any) {
+            const label = context.dataset.label || '';
+            const value = context.raw || 0;
+            return `${label}: ${value}`;
+          }
+        }
+      }
     },
     scales: {
-      x: { ticks: { font: { family: "Vazirmatn" } } },
-      y: { beginAtZero: true, ticks: { font: { family: "Vazirmatn" } } },
+      x: { 
+        ticks: { 
+          font: { family: "IRANSans" } 
+        } 
+      },
+      y: { 
+        beginAtZero: true, 
+        ticks: { font: { family: "IRANSans" } } 
+      },
     },
     animation: {
       duration: 1200,
@@ -91,12 +149,25 @@ export default function App() {
   };
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-8 text-center">داشبورد تحلیل دستورکارها</h1>
+    <div className="p-8 bg-gray-100 min-h-screen" dir="rtl">
+      <h1 className="text-3xl font-bold mb-8 text-center" style={{ fontFamily: "IRANSans" }}>
+        داشبورد تحلیل دستورکارها
+      </h1>
 
-      {/* نمودار دایره‌ای */}
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg mx-auto mb-10">
-        <Pie data={pieData} options={pieOptions} />
+      {/* نمودار دونات با آنوتیشن مرکزی */}
+      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg mx-auto mb-10 relative">
+        <Doughnut data={pieData} options={doughnutOptions} />
+        {/* آنوتیشن مرکزی */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-gray-800" style={{ fontFamily: "IRANSans" }}>
+              {totalCount}
+            </div>
+            <div className="text-sm text-gray-600 mt-1" style={{ fontFamily: "IRANSans" }}>
+              کل دستورکارها
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* نمودار ستونی */}
