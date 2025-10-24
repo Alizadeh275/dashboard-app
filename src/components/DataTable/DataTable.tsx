@@ -6,6 +6,15 @@ interface DataTableProps {
 }
 
 export const DataTable = ({ data, groupBy }: DataTableProps) => {
+  // Map groupBy dimensions to actual field names in the data
+  const fieldMapping: { [key: string]: string } = {
+    project_type: 'project_type_name',
+    status: 'status_name', 
+    location: 'city_name',
+    year: 'year',
+    month: 'month'
+  };
+
   const dimensionLabels: { [key: string]: string } = {
     project_type: 'نوع پروژه',
     status: 'وضعیت',
@@ -13,6 +22,9 @@ export const DataTable = ({ data, groupBy }: DataTableProps) => {
     year: 'سال',
     month: 'ماه'
   };
+
+  // Get the actual field name for each dimension
+  const getFieldName = (dim: string) => fieldMapping[dim] || dim;
 
   return (
     <div className="h-96 overflow-auto">
@@ -32,7 +44,7 @@ export const DataTable = ({ data, groupBy }: DataTableProps) => {
             <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
               {groupBy.map(dim => (
                 <td key={dim} className="px-4 py-2 border-b">
-                  {item[dim]?.toString() || 'نامشخص'}
+                  {item[getFieldName(dim)]?.toString() || 'نامشخص'}
                 </td>
               ))}
               <td className="px-4 py-2 border-b font-medium">
