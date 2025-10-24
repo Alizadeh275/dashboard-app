@@ -1,7 +1,7 @@
 import apiClient from "./config";
 
 export interface AggregationResult {
-  [key: string]: any; // Dynamic keys based on groupBy
+  [key: string]: any;
   count: number;
 }
 
@@ -13,12 +13,17 @@ export interface AggregationFilters {
   month?: number | null;
 }
 
+export interface AggregationResponse {
+  total_count: number;
+  chart_data: AggregationResult[];
+}
+
 export const aggregationApi = {
   // Get aggregated data
   getAggregatedData: async (
     filters: AggregationFilters = {},
     groupBy: string[] = []
-  ): Promise<AggregationResult[]> => {
+  ): Promise<AggregationResponse> => {
     const params = new URLSearchParams();
 
     // Add filters
@@ -33,7 +38,7 @@ export const aggregationApi = {
       params.append("group_by", field);
     });
 
-    const response = await apiClient.get<AggregationResult[]>(
+    const response = await apiClient.get<AggregationResponse>(
       `/aggregations/sum?${params.toString()}`
     );
     return response.data;

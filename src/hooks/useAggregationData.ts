@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import {
   aggregationApi,
   AggregationFilters,
-  AggregationResult,
+  AggregationResponse,
 } from "../api/aggregationApi";
 
 export const useAggregationData = (
   filters: AggregationFilters,
   groupBy: string[]
 ) => {
-  const [data, setData] = useState<AggregationResult[] | null>(null);
+  const [data, setData] = useState<AggregationResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
