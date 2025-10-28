@@ -12,7 +12,7 @@ interface FilterPanelProps {
   onGroupByChange: (groupBy: string[]) => void;
 }
 
-export const FilterPanel = ({ onFiltersChange, onGroupByChange }: FilterPanelProps) => {
+export const FilterPanelContainer = ({ onFiltersChange, onGroupByChange }: FilterPanelProps) => {
   const { dimensions, loading, error } = useDimensions();
   const { handleFilterChange } = useFilters(onFiltersChange);
   const { groupBy, handleGroupByChange } = useGroupBy(onGroupByChange);
