@@ -4,6 +4,13 @@ A modern analytics dashboard built with **React**, **TypeScript**, and **Chart.j
 
 ---
 
+## 📸 Screenshots
+
+### 📍 Dashboard Overview  
+![Dashboard Overview](./screenshots/main-page.png)
+
+---
+
 ## 🚀 Features
 
 - 📈 Dynamic dashboards  

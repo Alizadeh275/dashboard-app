@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FilterPanel } from '../FilterPanel/FilterPanel';
+import { FilterPanelContainer } from '../FilterPanel/FilterPanelContainer';
 import { DynamicChart } from '../DynamicChart/DynamicChart';
 
 export const AnalyticsDashboard = () => {
@@ -13,7 +13,7 @@ export const AnalyticsDashboard = () => {
           داشبورد تحلیل دستورکارها
         </h1>
         
-        <FilterPanel 
+        <FilterPanelContainer 
           onFiltersChange={setFilters}
           onGroupByChange={setGroupBy}
         />
